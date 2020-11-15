@@ -20,7 +20,6 @@ function App() {
         Prismic.Predicates.at('document.type', 'post')
       )
       if (response) {
-        console.log('All scapes: ', response);
         setAllScapes(response.results);
       }
     }
@@ -34,10 +33,7 @@ function App() {
         <h1>El pato al escape!</h1>
         <div className="scapes-container">
           <div className="scapes-wrapper">
-            {allScapes && allScapes.map(scape => {
-              console.log("All scapes down: ", allScapes);
-              return <span className="scape-def" onClick={() => setToShowScape(scape)}>{scape.data.title[0].text}</span>;
-            })}
+            {allScapes && allScapes.map(scape => <span key={scape.id} className="scape-def" onClick={() => setToShowScape(scape)}>{scape.data.title[0].text}</span>)}
           </div>
         </div>
         {toShowScape && toShowScape.data &&
@@ -45,6 +41,7 @@ function App() {
             <div className="single-scape-wrapper">
                 <span>{toShowScape.data.title[0].text}</span>
                 <span>{toShowScape.data.subtitle[0].text}</span>
+                <span>{toShowScape.data.body[0].text}</span>
             </div>
           </div>
         }
